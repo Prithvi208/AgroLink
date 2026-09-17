@@ -1,0 +1,11 @@
+{
+  "name": "agrolink",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "Start-Process powershell -ArgumentList '-Command', 'Set-ExecutionPolicy Bypass -Scope Process; cd backend; node server.js'; Start-Sleep -Seconds 2; Start-Process powershell -ArgumentList '-Command', 'Set-ExecutionPolicy Bypass -Scope Process; cd frontend; npx vite'",
+    "start:backend": "cd backend && node server.js",
+    "start:frontend": "cd frontend && npx vite",
+    "install:all": "cd backend && npm install; cd ../frontend && npm install"
+  }
+}
