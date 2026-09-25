@@ -70,6 +70,7 @@ AgroLink addresses this problem by bringing these activities together into a sin
 AgroLink provides a unified marketplace and logistics ecosystem with three primary user roles:
 
 ### 👨‍🌾 Farmer
+
 Farmers can:
 
 - Add and manage crop listings
@@ -85,6 +86,7 @@ Farmers can:
 - Communicate through the platform
 
 ### 🏪 Buyer
+
 Buyers can:
 
 - Browse available agricultural products
@@ -98,6 +100,7 @@ Buyers can:
 - Communicate with farmers and transporters
 
 ### 🚚 Transporter
+
 Transporters can:
 
 - View transport requests
@@ -147,7 +150,11 @@ AgroLink focuses on:
        Orders             Offers            Deliveries
        Alerts             Tracking          Earnings
        Transport          Payments          Performance
+
+
 🚜 Core Features
+
+
 1. 🌾 Crop Management
 
 Farmers can create and manage crop listings containing relevant information such as:
@@ -173,6 +180,7 @@ Search and discover listings
 Review pricing
 View available quantities
 Initiate purchase/offer workflows
+
 3. 🤝 Negotiation & Offers
 
 AgroLink supports offer-based interactions between farmers and buyers.
@@ -190,6 +198,7 @@ Farmer Receives Offer
 Accept / Manage Offer
   ↓
 Order Confirmation
+
 4. 📦 Order Management
 
 Orders form the core transaction layer between farmers and buyers.
@@ -209,6 +218,7 @@ Shipment
 Delivery
    ↓
 Payment Record
+
 5. 🚚 Integrated Transportation
 
 Instead of treating transportation as a completely separate activity, AgroLink connects transport requirements with agricultural orders.
@@ -227,7 +237,7 @@ Pickup Location
        ↓
     In Transit
        ↓
-Destination
+  Destination
        ↓
    Delivered
 
@@ -274,6 +284,7 @@ This helps support interactions across:
 Farmers
 Buyers
 Transporters
+
 12. 🚗 Carpool
 
 The platform includes a carpool/transport-sharing module designed to support transportation coordination.
@@ -340,6 +351,7 @@ Payment Record
   │
   ▼
 Transaction Completed
+
 🏗️ System Architecture
 
 AgroLink follows a three-tier web application architecture.
@@ -363,11 +375,11 @@ AgroLink follows a three-tier web application architecture.
 │ Node.js                                     │
 │ Express.js                                  │
 │ Authentication                              │
-│ Crop Management                              │
+│ Crop Management                             │
 │ Marketplace                                 │
 │ Orders & Offers                             │
 │ Transport                                   │
-│ Shipment Tracking                            │
+│ Shipment Tracking                           │
 │ Notifications                               │
 │ Payments Ledger                             │
 │ Price Alerts                                │
@@ -392,7 +404,9 @@ AgroLink follows a three-tier web application architecture.
 │ Price Alerts                                │
 │ Carpool / Messages                          │
 └─────────────────────────────────────────────┘
+
 🧰 Technology Stack
+
 Layer	Technology
 Frontend	React 18
 Build Tool	Vite
@@ -409,6 +423,7 @@ API Communication	REST APIs
 Maps	Leaflet
 Map Data	OpenStreetMap
 Localization	English / Hindi / Marathi
+
 🧩 Application Modules
 
 AgroLink is organized around several functional modules:
@@ -451,6 +466,7 @@ Vehicle Management
 Earnings
 Performance
 Messages
+
 🗄️ Database Design
 
 The core data relationships are structured around the agricultural transaction lifecycle.
@@ -537,6 +553,7 @@ Market Intelligence
      ├── Market Prices
      ├── Price Alerts
      └── Market Advisor
+
 🗺️ Maps & Location
 
 AgroLink uses:
@@ -579,8 +596,8 @@ Localization is handled through a centralized translation system.
 The objective is to make the platform accessible to users who may be more comfortable using regional languages.
 
 🧠 Decision Support
-Rule-Based Market Advisor
 
+Rule-Based Market Advisor
 AgroLink includes a rule-based Market Advisor that uses available market information and predefined decision rules to provide simple guidance.
 
 The current implementation is intentionally lightweight and transparent.
@@ -621,7 +638,9 @@ AgroLink/
 │
 ├── .gitignore
 └── README.md
+
 ⚙️ Installation & Setup
+
 Prerequisites
 
 Make sure the following are installed:
@@ -635,17 +654,24 @@ Verify:
 node --version
 npm --version
 git --version
+
 🚀 Running AgroLink Locally
+
 1. Clone the repository
+
 git clone https://github.com/Prithvi208/AgroLink.git
 
 Navigate into the project:
 
 cd AgroLink
+
 2. Install frontend dependencies
+
 cd frontend
 npm install
+
 3. Start the frontend
+
 npm run dev
 
 The frontend will be available at the local development URL shown by Vite.
@@ -710,8 +736,7 @@ Less complexity. More clarity.
 
 Important actions are organized around role-specific dashboards so that users can quickly access the tasks most relevant to them.
 
-Farmer
-Dashboard
+Farmer Dashboard
    ↓
 My Crops
    ↓
@@ -721,9 +746,7 @@ Offers
    ↓
 Orders
    ↓
-Transport
-Buyer
-Dashboard
+Transport/Buyer Dashboard
    ↓
 Marketplace
    ↓
@@ -733,9 +756,7 @@ Orders
    ↓
 Transport
    ↓
-Tracking
-Transporter
-Dashboard
+Tracking Transporter Dashboard
    ↓
 Transport Requests
    ↓
@@ -744,6 +765,7 @@ Trips
 Active Delivery
    ↓
 Earnings
+
 🔮 Future Scope
 
 AgroLink can be extended with several advanced capabilities.
@@ -761,6 +783,7 @@ ETA
 Route optimization
 Multiple stops
 Delivery planning
+
 🤖 Advanced AI/ML Decision Support
 
 Future versions could introduce machine-learning models for:
@@ -770,6 +793,7 @@ Demand prediction
 Spoilage prediction
 Route optimization
 Personalized market recommendations
+
 💳 Digital Payments
 
 The payment ledger can be extended into a complete digital payment system with:
@@ -778,6 +802,7 @@ Payment gateway integration
 Online settlement
 Transaction verification
 Digital receipts
+
 📊 Analytics Dashboard
 
 Future analytics could provide:
@@ -787,6 +812,7 @@ Buyer purchase trends
 Transporter performance
 Crop demand analytics
 Regional market trends
+
 🌍 Scalability
 
 The current architecture can be evolved toward:
@@ -797,6 +823,7 @@ Redis caching
 Object storage
 Microservices where appropriate
 Production-grade observability
+
 ⚠️ Current Limitations
 
 The current prototype has some intentional limitations:
@@ -839,6 +866,7 @@ It connects multiple stages of the agricultural transaction lifecycle:
           │
           ▼
         Payment
+
 
 Around this core transaction flow, AgroLink adds:
 
@@ -901,28 +929,3 @@ If you find AgroLink interesting, consider giving the repository a ⭐ on GitHub
 
 AgroLink — Connecting Agriculture, People & Possibilities. 🌾
 
-
-### Ek important correction, bhai
-
-README mein maine **Google Maps nahi dala**, kyunki tumhare current project architecture ke according map implementation **Leaflet + OpenStreetMap** hai. Agar hum Google Maps properly implement kar dete hain, tab README ke relevant sections ko update karke:
-
-> Google Maps JavaScript API + Places API + Geocoding + Routes API
-
-kar denge.
-
-Aur **ML/AI ka overclaim bhi nahi kiya** — Market Advisor ko correctly **rule-based** rakha hai. SIH presentation mein ye honesty actually useful rahegi.
-
-### README ko aur professional banana ho toh
-
-GitHub repo ke top par eventually ye 3 cheezein bhi add kar sakte hain:
-
-```text
-🌾 AgroLink
-Connect. Trade. Grow.
-
-[Live Demo] [Documentation] [SIH 2026]
-
-Screenshots
-Architecture
-Features
-Demo Flow
