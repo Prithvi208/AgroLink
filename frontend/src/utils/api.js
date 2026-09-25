@@ -40,7 +40,7 @@ async function request(path, options = {}) {
 
 export const api = {
   get: (path) => request(path),
-  post: (path, body) => request(path, { method: 'POST', body: safeStringify(body) }),
-  put: (path, body) => request(path, { method: 'PUT', body: safeStringify(body) }),
+  post: (path, body) => request(path, { method: 'POST', body: body !== undefined ? safeStringify(body) : undefined }),
+  put: (path, body) => request(path, { method: 'PUT', body: body !== undefined ? safeStringify(body) : undefined }),
   delete: (path) => request(path, { method: 'DELETE' }),
 };

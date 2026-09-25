@@ -31,8 +31,17 @@ export default function Register() {
 
     setLoading(true);
     try {
-      await register(form);
-      navigate('/');
+      const userData = await register(form);
+      // Redirect based on user role
+      if (userData.role === 'farmer') {
+        navigate('/');
+      } else if (userData.role === 'buyer') {
+        navigate('/buyer');
+      } else if (userData.role === 'transporter') {
+        navigate('/transporter');
+      } else {
+        navigate('/');
+      }
     } catch (err) {
       setError(err.message);
     } finally {

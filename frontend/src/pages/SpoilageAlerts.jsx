@@ -58,7 +58,7 @@ export default function SpoilageAlerts() {
       setResult(res);
       loadAlerts();
     } catch (err) {
-      alert(err.message);
+      alert(t('spoilage.checkFailed') || 'Unable to check alerts right now. Please try again.');
     } finally {
       setChecking(false);
     }

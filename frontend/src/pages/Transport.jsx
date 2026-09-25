@@ -1,15 +1,20 @@
-import { useState, useEffect, useSearchParams } from 'react';
+import { useState, useEffect } from 'react';
 import { Truck, MapPin, CheckCircle, Clock, Navigation, ArrowLeft, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { api } from '../utils/api';
 
 const statusColors = {
-  pending: 'bg-yellow-100 text-yellow-700', accepted: 'bg-blue-100 text-blue-700', ready_for_pickup: 'bg-orange-100 text-orange-700', picked_up: 'bg-purple-100 text-purple-700',
-  in_transit: 'bg-indigo-100 text-indigo-700', delivered: 'bg-green-100 text-green-700', cancelled: 'bg-red-100 text-red-700'
+  pending: 'bg-yellow-100 text-yellow-700',
+  accepted: 'bg-blue-100 text-blue-700',
+  ready_for_pickup: 'bg-orange-100 text-orange-700',
+  picked_up: 'bg-purple-100 text-purple-700',
+  in_transit: 'bg-indigo-100 text-indigo-700',
+  delivered: 'bg-green-100 text-green-700',
+  cancelled: 'bg-red-100 text-red-700'
 };
 
-export default function Transport() {
+function Transport() {
   const { user } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -89,7 +94,7 @@ export default function Transport() {
     }
   };
 
-return (
+  return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-2">Transport Hub</h1>
       <p className="text-gray-600 mb-8">{user.role === 'transporter' ? 'Find and manage delivery jobs' : 'Manage your transport bookings'}</p>
@@ -154,66 +159,63 @@ return (
         </div>
       )}
 
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Transport Hub</h1>
-        <p className="text-gray-600 mb-8">{user.role === 'transporter' ? 'Find and manage delivery jobs' : 'Manage your transport bookings'}</p>
+      {user.role === 'transporter' && (
+        <div className="flex gap-2 mb-6">
+          {[{ key: 'available', label: 'Available Jobs' }, { key: 'my', label: 'My Assignments' }].map(t => (
+            <button key={t.key} onClick={() => setTab(t.key)}
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition ${tab === t.key ? 'bg-agro-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+              {t.label}
+            </button>
+          ))}
+        </div>
+      )}
 
-        {user.role === 'transporter' && (
-          <div className="flex gap-2 mb-6">
-            {[{ key: 'available', label: 'Available Jobs' }, { key: 'my', label: 'My Assignments' }].map(t => (
-              <button key={t.key} onClick={() => setTab(t.key)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition ${tab === t.key ? 'bg-agro-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
-                {t.label}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {loading ? (
-          <div className="flex items-center justify-center h-64"><div className="animate-spin rounded-full h-12 w-12 border-4 border-agro-500 border-t-transparent"></div></div>
-        ) : bookings.length === 0 ? (
-          <div className="text-center py-16"><Truck className="h-16 w-16 mx-auto mb-4 text-gray-300" /><h3 className="text-xl font-bold text-gray-900 mb-2">No bookings found</h3><p className="text-gray-500">{
-            user.role === 'transporter' ? 'Check back later for available jobs' : 'Book transport from the marketplace'
-          }</p></div>
-        ) : (
-          <div className="space-y-4">
-            {bookings.map(b => (
-              <div key={b.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="font-bold text-gray-900">{b.crop_name || 'Order'}</h3>
-                    <p className="text-sm text-gray-500">Order Value: ${b.order_value || b.total_price || 'N/A'}</p>
-                  </div>
-                  <span className={`text-xs font-medium px-3 py-1 rounded-full capitalize ${statusColors[b.status] || 'bg-gray-100 text-gray-700'}`}>{b.status?.replace('_', ' ')}</span>
+      {loading ? (
+        <div className="flex items-center justify-center h-64"><div className="animate-spin rounded-full h-12 w-12 border-4 border-agro-500 border-t-transparent"></div></div>
+      ) : bookings.length === 0 ? (
+        <div className="text-center py-16"><Truck className="h-16 w-16 mx-auto mb-4 text-gray-300" /><h3 className="text-xl font-bold text-gray-900 mb-2">No bookings found</h3><p className="text-gray-500">{
+          user.role === 'transporter' ? 'Check back later for available jobs' : 'Book transport from the marketplace'
+        }</p></div>
+      ) : (
+        <div className="space-y-4">
+          {bookings.map(b => (
+            <div key={b.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+              <div className="flex items-start justify-between">
+                <div>
+                  <h3 className="font-bold text-gray-900">{b.crop_name || 'Order'}</h3>
+                  <p className="text-sm text-gray-500">Order Value: ${b.order_value || b.total_price || 'N/A'}</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-                  <div className="flex items-center gap-2 text-sm text-gray-600"><MapPin className="h-4 w-4 text-agro-600" /> Pickup: {b.pickup_location}</div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600"><Navigation className="h-4 w-4 text-blue-600" /> Drop-off: {b.dropoff_location}</div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600"><Clock className="h-4 w-4 text-earth-600" /> Fare: ${b.fare}</div>
-                </div>
-                {b.tracking_id && <p className="text-sm text-gray-500 mt-2">Tracking: <span className="font-mono font-bold">{b.tracking_id}</span></p>}
-                <div className="flex gap-2 mt-4 pt-4 border-t">
-                  {user.role === 'transporter' && b.status === 'pending' && !b.transporter_id && (
-                    <button onClick={() => acceptBooking(b.id)} className="flex items-center gap-1 px-4 py-2 bg-agro-600 text-white rounded-xl text-sm font-medium hover:bg-agro-700 transition"><CheckCircle className="h-4 w-4" /> Accept Job</button>
-                  )}
-{user.role === 'transporter' && b.transporter_id && b.status !== 'delivered' && b.status !== 'cancelled' && (
-                      <>
-                        {b.status === 'accepted' && <button onClick={() => updateStatus(b.id, 'ready_for_pickup')} className="px-4 py-2 bg-orange-600 text-white rounded-xl text-sm font-medium hover:bg-orange-700 transition">Mark Ready for Pickup</button>}
-                        {b.status === 'ready_for_pickup' && <button onClick={() => updateStatus(b.id, 'picked_up')} className="px-4 py-2 bg-purple-600 text-white rounded-xl text-sm font-medium hover:bg-purple-700 transition">Mark Picked Up</button>}
-                        {b.status === 'picked_up' && <button onClick={() => updateStatus(b.id, 'in_transit')} className="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-700 transition">In Transit</button>}
-                        {b.status === 'in_transit' && <button onClick={() => updateStatus(b.id, 'delivered')} className="px-4 py-2 bg-green-600 text-white rounded-xl text-sm font-medium hover:bg-green-700 transition">Delivered</button>}
-                        <button onClick={() => updateStatus(b.id, 'cancelled')} className="px-4 py-2 border border-red-200 text-red-600 rounded-xl text-sm font-medium hover:bg-red-50 transition">Cancel</button>
-                      </>
-                    )}
-                  {b.tracking_id && (
-                    <a href={`/track/${b.tracking_id}`} className="px-4 py-2 border rounded-xl text-sm font-medium hover:bg-gray-50 transition">Track Shipment</a>
-                  )}
-                </div>
+                <span className={`text-xs font-medium px-3 py-1 rounded-full capitalize ${statusColors[b.status] || 'bg-gray-100 text-gray-700'}`}>{b.status?.replace('_', ' ')}</span>
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                <div className="flex items-center gap-2 text-sm text-gray-600"><MapPin className="h-4 w-4 text-agro-600" /> Pickup: {b.pickup_location}</div>
+                <div className="flex items-center gap-2 text-sm text-gray-600"><Navigation className="h-4 w-4 text-blue-600" /> Drop-off: {b.dropoff_location}</div>
+                <div className="flex items-center gap-2 text-sm text-gray-600"><Clock className="h-4 w-4 text-earth-600" /> Fare: ${b.fare}</div>
+              </div>
+              {b.tracking_id && <p className="text-sm text-gray-500 mt-2">Tracking: <span className="font-mono font-bold">{b.tracking_id}</span></p>}
+              <div className="flex gap-2 mt-4 pt-4 border-t">
+                {user.role === 'transporter' && b.status === 'pending' && !b.transporter_id && (
+                  <button onClick={() => acceptBooking(b.id)} className="flex items-center gap-1 px-4 py-2 bg-agro-600 text-white rounded-xl text-sm font-medium hover:bg-agro-700 transition"><CheckCircle className="h-4 w-4" /> Accept Job</button>
+                )}
+                {user.role === 'transporter' && b.transporter_id && b.status !== 'delivered' && b.status !== 'cancelled' && (
+                  <>
+                    {b.status === 'accepted' && <button onClick={() => updateStatus(b.id, 'ready_for_pickup')} className="px-4 py-2 bg-orange-600 text-white rounded-xl text-sm font-medium hover:bg-orange-700 transition">Mark Ready for Pickup</button>}
+                    {b.status === 'ready_for_pickup' && <button onClick={() => updateStatus(b.id, 'picked_up')} className="px-4 py-2 bg-purple-600 text-white rounded-xl text-sm font-medium hover:bg-purple-700 transition">Mark Picked Up</button>}
+                    {b.status === 'picked_up' && <button onClick={() => updateStatus(b.id, 'in_transit')} className="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-700 transition">In Transit</button>}
+                    {b.status === 'in_transit' && <button onClick={() => updateStatus(b.id, 'delivered')} className="px-4 py-2 bg-green-600 text-white rounded-xl text-sm font-medium hover:bg-green-700 transition">Delivered</button>}
+                    <button onClick={() => updateStatus(b.id, 'cancelled')} className="px-4 py-2 border border-red-200 text-red-600 rounded-xl text-sm font-medium hover:bg-red-50 transition">Cancel</button>
+                  </>
+                )}
+                {b.tracking_id && (
+                  <a href={`/track/${b.tracking_id}`} className="px-4 py-2 border rounded-xl text-sm font-medium hover:bg-gray-50 transition">Track Shipment</a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
+
+export default Transport;

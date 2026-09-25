@@ -36,25 +36,27 @@ function getNavItems(t, user) {
     };
   }
 
-  return {
+return {
     main: [
-      { to: '/', label: t('nav.dashboard') || 'Dashboard', icon: Home, roles: ['farmer', 'buyer', 'transporter'] },
+      { to: '/', label: t('nav.dashboard') || 'Dashboard', icon: Home, roles: ['farmer'] },
+      { to: '/buyer', label: t('nav.dashboard') || 'Dashboard', icon: Home, roles: ['buyer'] },
       { to: '/my-crops', label: t('nav.myCrops') || 'My Crops', icon: Wheat, roles: ['farmer'] },
       { to: '/marketplace', label: t('nav.marketplace') || 'Marketplace', icon: ShoppingCart, roles: ['farmer', 'buyer', 'transporter'] },
       { to: '/transport', label: t('nav.transport') || 'Transport', icon: Truck, roles: ['buyer', 'transporter'] },
       { to: '/carpool', label: t('nav.carpool') || 'Carpool', icon: Car, roles: ['farmer', 'transporter'] },
     ],
     tools: [
-      { to: '/offers', label: t('offers.title') || 'Offers', icon: Hand, roles: ['farmer'] },
+      { to: '/offers', label: t('offers.title') || 'Offers', icon: Hand, roles: ['farmer', 'buyer'] },
       { to: '/market-advice', label: t('marketAdvice.title') || 'Market Advisor', icon: Lightbulb, roles: ['farmer', 'buyer'] },
       { to: '/price-alerts', label: t('nav.priceAlerts') || 'Price Alerts', icon: TrendingUp, roles: ['farmer', 'buyer'] },
       { to: '/spoilage-alerts', label: t('spoilage.title') || 'Spoilage Alerts', icon: AlertTriangle, roles: ['farmer'] },
       { to: '/payments', label: t('nav.payments') || 'Payments', icon: Wallet, roles: ['farmer', 'buyer', 'transporter'] },
-      { to: '/my-orders', label: t('nav.myOrders') || 'Orders', icon: Package, roles: ['buyer'] },
-      { to: '/farmer-orders', label: t('nav.ordersReceived') || 'Orders', icon: Package, roles: ['farmer'] },
+      { to: '/my-orders', label: t('nav.myOrders') || 'My Orders', icon: Package, roles: ['buyer'] },
+      { to: '/farmer-orders', label: t('nav.ordersReceived') || 'Orders Received', icon: Package, roles: ['farmer'] },
     ],
     account: [
       { to: '/notifications', label: t('nav.notifications') || 'Notifications', icon: Bell, roles: ['farmer', 'buyer', 'transporter'] },
+      { to: '/messages', label: t('nav.messages') || 'Messages', icon: MessageSquare, roles: ['farmer', 'buyer', 'transporter'] },
       { to: '/profile', label: t('nav.profile') || 'Profile', icon: User, roles: ['farmer', 'buyer', 'transporter'] },
     ],
   };

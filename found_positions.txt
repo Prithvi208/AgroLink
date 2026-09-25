@@ -1,0 +1,66 @@
+Found at position 2139: farmerDashboard: {
+      addCrop: 'Add New Crop',
+
+Found at position 5391: farmerDashboard: {
+      addCrop: 'नई फसल जोड़ें',
+Found at position 14167: farmerDashboard: {
+      addCrop: 'नई फसल जोड़ें',
+Found at position 24993: farmerDashboard: {
+      addCrop: 'नवी पिक जोडा',
+
+Found at position 2139: farmerDashboard: {
+      addCrop: 'Add New Crop',
+
+Found at position 5391: farmerDashboard: {
+      addCrop: 'नई फसल जोड़ें',
+Found at position 14167: farmerDashboard: {
+      addCrop: 'नई फसल जोड़ें',
+Found at position 24993: farmerDashboard: {
+      addCrop: 'नवी पिक जोडा',
+
+Match 1 at position 2139:
+farmerDashboard: {
+      addCrop: 'Add New Crop',
+      viewMarketplace: 'View M
+---
+Match 2 at position 5391:
+farmerDashboard: {
+      addCrop: 'नई फसल जोड़ें',
+      viewMarketplace: 'मार्क
+---
+Match 3 at position 14167:
+farmerDashboard: {
+      addCrop: 'नई फसल जोड़ें',
+      viewMarketplace: 'मार्क
+---
+Match 4 at position 24993:
+farmerDashboard: {
+      addCrop: 'नवी पिक जोडा',
+      viewMarketplace: 'मार्के
+---
+Found at position 2139: farmerDashboard: {
+      addCrop: 'Add New Crop',
+
+Found at position 5391: farmerDashboard: {
+      addCrop: 'नई फसल जोड़ें',
+Found at position 14167: farmerDashboard: {
+      addCrop: 'नई फसल जोड़ें',
+Found at position 24993: farmerDashboard: {
+      addCrop: 'नवी पिक जोडा',
+
+Found at position 2139: farmerDashboard: {
+      addCrop: 'Add New Crop',
+
+Found at position 12665: farmerDashboard: {
+      addCrop: 'नई फसल जोड़ें',
+Found at position 23491: farmerDashboard: {
+      addCrop: 'नवी पिक जोडा',
+
+Found at position 2139: farmerDashboard: {
+      addCrop: 'Add New Crop',
+
+Found at position 12665: farmerDashboard: {
+      addCrop: 'नई फसल जोड़ें',
+Found at position 23491: farmerDashboard: {
+      addCrop: 'नवी पिक जोडा',
+

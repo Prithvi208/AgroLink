@@ -4,7 +4,8 @@ import Sidebar from './components/Sidebar';
 import ErrorBoundary from './components/ErrorBoundary';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
+import FarmerDashboard from './pages/FarmerDashboard';
+import BuyerDashboard from './pages/BuyerDashboard';
 import Marketplace from './pages/Marketplace';
 import CropDetail from './pages/CropDetail';
 import MyCrops from './pages/MyCrops';
@@ -27,6 +28,7 @@ import ActiveDelivery from './pages/ActiveDelivery';
 import MyVehicles from './pages/MyVehicles';
 import Earnings from './pages/Earnings';
 import Performance from './pages/Performance';
+import Offers from './pages/Offers';
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -35,9 +37,19 @@ function ProtectedRoute({ children }) {
   return children;
 }
 
+function FarmerHome() {
+  const { user } = useAuth();
+  return user?.role === 'farmer' ? <FarmerDashboard /> : <Navigate to="/login" />;
+}
+
+function BuyerHome() {
+  const { user } = useAuth();
+  return user?.role === 'buyer' ? <BuyerDashboard /> : <Navigate to="/login" />;
+}
+
 function TransporterHome() {
   const { user } = useAuth();
-  return user?.role === 'transporter' ? <Navigate to="/transporter/dashboard" replace /> : <Dashboard />;
+  return user?.role === 'transporter' ? <Navigate to="/transporter/dashboard" replace /> : <Navigate to="/login" />;
 }
 
 export default function App() {
@@ -51,7 +63,9 @@ export default function App() {
           <Routes>
           <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
           <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
-          <Route path="/" element={<ProtectedRoute><TransporterHome /></ProtectedRoute>} />
+          <Route path="/" element={<ProtectedRoute><FarmerHome /></ProtectedRoute>} />
+          <Route path="/buyer" element={<ProtectedRoute><BuyerHome /></ProtectedRoute>} />
+          <Route path="/transporter" element={<ProtectedRoute><TransporterHome /></ProtectedRoute>} />
           <Route path="/marketplace" element={<ProtectedRoute><Marketplace /></ProtectedRoute>} />
           <Route path="/marketplace/:id" element={<ProtectedRoute><CropDetail /></ProtectedRoute>} />
           <Route path="/my-crops" element={<ProtectedRoute><MyCrops /></ProtectedRoute>} />

@@ -54,7 +54,7 @@ export default function PriceAlerts() {
       setResult(res);
       loadAlerts();
     } catch (err) {
-      alert(err.message);
+      alert(t('priceAlerts.checkFailed') || 'Unable to check alerts right now. Please try again.');
     } finally {
       setChecking(false);
     }

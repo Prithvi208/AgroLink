@@ -15,14 +15,14 @@ export function LanguageProvider({ children }) {
 
   const dict = translations[lang] || translations.en;
 
-  const t = (key) => {
+  const t = (key, defaultValue) => {
     const parts = key.split('.');
     let val = dict;
     for (const p of parts) {
-      if (val == null) return key;
+      if (val == null) return defaultValue;
       val = val[p];
     }
-    return val ?? key;
+    return val ?? defaultValue;
   };
 
   return (
