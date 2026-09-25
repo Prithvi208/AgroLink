@@ -3,6 +3,7 @@ import { CheckCircle, XCircle, MessageSquare, MapPin, Phone, Clock, AlertCircle,
 import { api } from '../utils/api';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
+import { formatCurrency, formatPerUnit } from '../utils/netReturn';
 
 const statusColors = {
   pending: 'bg-yellow-100 text-yellow-700', accepted: 'bg-green-100 text-green-700', rejected: 'bg-red-100 text-red-700'
@@ -35,7 +36,7 @@ export default function Offers() {
   };
 
   const handleAccept = async (offer) => {
-    if (!confirm(`${t('offers.acceptConfirm')} ${offer.offered_quantity} ${offer.unit} ${offer.crop_name} $${offer.offered_price_per_unit}/${offer.unit}?`)) return;
+    if (!confirm(`${t('offers.acceptConfirm')} ${offer.offered_quantity} ${offer.unit} ${offer.crop_name} {formatPerUnit(offer.offered_price_per_unit, offer.unit)}?`)) return;
     
     setActionLoading(offer.id);
     try {
@@ -153,16 +154,16 @@ export default function Offers() {
                     <MessageSquare className="h-4 w-4 text-agro-600" /> {t('offers.offeredQuantity')}: {offer.offered_quantity} {offer.unit}
                   </div>
                   <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Package className="h-4 w-4 text-blue-600" /> {t(`offers.${priceLabel}`)}: ${priceValue}/{offer.unit}
+                    <Package className="h-4 w-4 text-blue-600" /> {t(`offers.${priceLabel}`)}: {formatPerUnit(priceValue, offer.unit)}
                   </div>
                   <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Clock className="h-4 w-4 text-earth-600" /> {t('offers.offerPrice')}: ${offer.offered_price_per_unit}/{offer.unit}
+                    <Clock className="h-4 w-4 text-earth-600" /> {t('offers.offerPrice')}: {formatPerUnit(offer.offered_price_per_unit, offer.unit)}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
                   <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Package className="h-4 w-4 text-purple-600" /> {t('offers.proposedTotal')}: <span className="font-bold text-agro-700">${offer.proposed_total.toFixed(2)}</span>
+                    <Package className="h-4 w-4 text-purple-600" /> {t('offers.proposedTotal')}: <span className="font-bold text-agro-700">{formatCurrency(offer.proposed_total)}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-gray-600">
                     <MapPin className="h-4 w-4 text-red-600" /> {t('offers.deliveryAddress')}: {offer.delivery_address}

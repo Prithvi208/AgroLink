@@ -5,7 +5,7 @@ import { MapPin, Phone, Calendar, Package, ShoppingCart, ArrowLeft, Truck, Check
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import { api } from '../utils/api';
-import { calculateNetReturn, formatCurrency, formatPerKg } from '../utils/netReturn';
+import { calculateNetReturn, formatCurrency, formatPerUnit } from '../utils/netReturn';
 
 const categoryIcons = {
   grains: React.createElement(Wheat, {className: "text-4xl"}),
@@ -182,8 +182,7 @@ export default function CropDetail() {
 
           <div className="bg-white border rounded-2xl p-6 mb-6">
             <div className="flex items-baseline gap-2 mb-4">
-              <span className="text-4xl font-bold text-agro-700">${crop.price_per_unit}</span>
-              <span className="text-gray-500">per {crop.unit}</span>
+              <span className="text-4xl font-bold text-agro-700">{formatPerUnit(crop.price_per_unit, crop.unit)}</span>
             </div>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div className="flex items-center gap-2 text-gray-600">
@@ -297,7 +296,7 @@ export default function CropDetail() {
                   )}
                   <div className="bg-agro-50 rounded-xl p-4">
                     <p className="text-sm text-gray-600">Total Amount</p>
-                    <p className="text-2xl font-bold text-agro-700">${(quantity * crop.price_per_unit).toFixed(2)}</p>
+                    <p className="text-2xl font-bold text-agro-700">{formatCurrency(quantity * crop.price_per_unit)}</p>
                   </div>
                   <button onClick={handleBuy} disabled={booking}
                     className="w-full bg-agro-600 text-white py-3 rounded-xl font-semibold hover:bg-agro-700 transition flex items-center justify-center gap-2 disabled:opacity-50">
@@ -319,7 +318,7 @@ export default function CropDetail() {
                     <div className="grid grid-cols-2 gap-3 text-sm">
                       <div>
                         <p className="text-gray-500">{t('offers.listedPrice')}</p>
-                        <p className="font-bold text-gray-900">${crop.price_per_unit}/{crop.unit}</p>
+                        <p className="font-bold text-gray-900">{formatPerUnit(crop.price_per_unit, crop.unit)}</p>
                       </div>
                       <div>
                         <p className="text-gray-500">{t('marketplace.available')}</p>
@@ -394,7 +393,7 @@ export default function CropDetail() {
                     )}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">{t('offers.proposedTotalLabel')}</label>
-                    <p className="text-2xl font-bold text-blue-700">${offerQuantity && offerPrice ? (offerQuantity * offerPrice).toFixed(2) : '0.00'}</p>
+                    <p className="text-2xl font-bold text-blue-700">{formatCurrency(offerQuantity && offerPrice ? (offerQuantity * offerPrice) : 0)}</p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">{t('offers.deliveryAddress')}</label>

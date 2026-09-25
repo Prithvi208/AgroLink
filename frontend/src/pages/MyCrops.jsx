@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Plus, Edit2, Trash2, Wheat, X } from 'lucide-react';
 import { api } from '../utils/api';
+import { formatCurrency, formatPerUnit } from '../utils/netReturn';
 
 const categories = ['grains', 'vegetables', 'fruits', 'spices', 'dairy', 'pulses', 'cotton', 'sugarcane'];
 const categoryIcons = { grains: '🌾', vegetables: '🥬', fruits: '🍎', spices: '🌶️', dairy: '🥛', pulses: '🫘', cotton: '🧵', sugarcane: '🍬' };
@@ -110,8 +111,8 @@ export default function MyCrops() {
                 </div>
               </div>
               <div className="space-y-1 text-sm text-gray-600 mb-4">
-                <p>{crop.quantity} {crop.unit} @ ${crop.price_per_unit}/{crop.unit}</p>
-                <p className="font-bold text-agro-700">${(crop.quantity * crop.price_per_unit).toFixed(2)} total</p>
+                <p>{crop.quantity} {crop.unit} @ {formatPerUnit(crop.price_per_unit, crop.unit)}</p>
+                <p className="font-bold text-agro-700">{formatCurrency(crop.quantity * crop.price_per_unit)} total</p>
               </div>
               <div className="flex gap-2">
                 <button onClick={() => handleEdit(crop)} className="flex-1 flex items-center justify-center gap-1 px-3 py-2 border rounded-xl text-sm font-medium hover:bg-gray-50 transition"><Edit2 className="h-4 w-4" /> Edit</button>

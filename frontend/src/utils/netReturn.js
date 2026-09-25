@@ -57,6 +57,10 @@ export function formatCurrency(amount) {
   return `₹${Number(amount).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-export function formatPerKg(amount) {
-  return `${formatCurrency(amount)}/kg`;
+export function formatPerUnit(amount, unit = 'kg') {
+  return `${formatCurrency(amount)}/${unit}`;
+}
+
+export function formatCurrencyCompact(amount) {
+  return `₹${Number(amount).toLocaleString('en-IN')}`;
 }

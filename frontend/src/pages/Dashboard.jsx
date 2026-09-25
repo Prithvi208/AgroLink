@@ -4,6 +4,7 @@ import { TrendingUp, ShoppingCart, Truck, Wheat, Users, ArrowRight, AlertTriangl
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import { api } from '../utils/api';
+import { formatCurrency, formatPerUnit } from '../utils/netReturn';
 
 const categoryIcons = {
   grains: '🌾', vegetables: '🥬', fruits: '🍎', spices: '🌶️', dairy: '🥛', pulses: '🫘', cotton: '🧵', sugarcane: '🍬', default: '🌱'
@@ -89,7 +90,7 @@ export default function Dashboard() {
                     <p className="text-sm text-gray-500">{crop.farmer_name} · {crop.location || 'India'}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold text-agro-700">${crop.price_per_unit}/{crop.unit}</p>
+                    <p className="font-bold text-agro-700">{formatPerUnit(crop.price_per_unit, crop.unit)}</p>
                     <p className="text-xs text-gray-500">{crop.quantity} {crop.unit} available</p>
                   </div>
                 </Link>
@@ -115,7 +116,7 @@ export default function Dashboard() {
                     <span className="text-sm font-medium capitalize">{cat.category}</span>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-bold text-gray-900">${Number(cat.avg_price).toFixed(2)}/kg</p>
+                    <p className="text-sm font-bold text-gray-900">{formatPerUnit(cat.avg_price)}</p>
                     <p className="text-xs text-gray-500">{cat.count} listings</p>
                   </div>
                 </div>

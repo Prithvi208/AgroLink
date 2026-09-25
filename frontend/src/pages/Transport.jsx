@@ -3,6 +3,7 @@ import { Truck, MapPin, CheckCircle, Clock, Navigation, ArrowLeft, X } from 'luc
 import { useAuth } from '../context/AuthContext';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { api } from '../utils/api';
+import { formatCurrency } from '../utils/netReturn';
 
 const statusColors = {
   pending: 'bg-yellow-100 text-yellow-700',
@@ -183,14 +184,14 @@ function Transport() {
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="font-bold text-gray-900">{b.crop_name || 'Order'}</h3>
-                  <p className="text-sm text-gray-500">Order Value: ${b.order_value || b.total_price || 'N/A'}</p>
+                  <p className="text-sm text-gray-500">Order Value: {formatCurrency(b.order_value || b.total_price || 0)}</p>
                 </div>
                 <span className={`text-xs font-medium px-3 py-1 rounded-full capitalize ${statusColors[b.status] || 'bg-gray-100 text-gray-700'}`}>{b.status?.replace('_', ' ')}</span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
                 <div className="flex items-center gap-2 text-sm text-gray-600"><MapPin className="h-4 w-4 text-agro-600" /> Pickup: {b.pickup_location}</div>
                 <div className="flex items-center gap-2 text-sm text-gray-600"><Navigation className="h-4 w-4 text-blue-600" /> Drop-off: {b.dropoff_location}</div>
-                <div className="flex items-center gap-2 text-sm text-gray-600"><Clock className="h-4 w-4 text-earth-600" /> Fare: ${b.fare}</div>
+                <div className="flex items-center gap-2 text-sm text-gray-600"><Clock className="h-4 w-4 text-earth-600" /> Fare: {formatCurrency(b.fare)}</div>
               </div>
               {b.tracking_id && <p className="text-sm text-gray-500 mt-2">Tracking: <span className="font-mono font-bold">{b.tracking_id}</span></p>}
               <div className="flex gap-2 mt-4 pt-4 border-t">

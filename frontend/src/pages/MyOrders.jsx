@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Package, Eye, Truck } from 'lucide-react';
 import { api } from '../utils/api';
+import { formatCurrency } from '../utils/netReturn';
 
 const statusColors = {
   pending: 'bg-yellow-100 text-yellow-700', confirmed: 'bg-blue-100 text-blue-700', shipped: 'bg-purple-100 text-purple-700',
@@ -38,7 +39,7 @@ export default function MyOrders() {
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-sm">
                 <div><p className="text-gray-500">Quantity</p><p className="font-medium">{order.quantity}</p></div>
-                <div><p className="text-gray-500">Total</p><p className="font-bold text-agro-700">${order.total_price}</p></div>
+                <div><p className="text-gray-500">Total</p><p className="font-bold text-agro-700">{formatCurrency(order.total_price)}</p></div>
                 <div><p className="text-gray-500">Payment</p><p className={`font-medium ${order.payment_status === 'paid' ? 'text-green-600' : 'text-yellow-600'}`}>{order.payment_status}</p></div>
                 <div><p className="text-gray-500">Date</p><p className="font-medium">{new Date(order.created_at).toLocaleDateString()}</p></div>
               </div>

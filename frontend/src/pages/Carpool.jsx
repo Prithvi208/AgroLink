@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Car, MapPin, Clock, Users, Plus, X, DollarSign } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../utils/api';
+import { formatCurrency } from '../utils/netReturn';
 
 export default function Carpool() {
   const { user } = useAuth();
@@ -130,7 +131,7 @@ export default function Carpool() {
                   </div>
                   <div className="flex items-center justify-between pt-3 border-t">
                     <div className="flex items-center gap-1 text-sm text-gray-600"><Users className="h-4 w-4" /> {ride.available_seats} seats</div>
-                    <div className="flex items-center gap-1 font-bold text-agro-700"><DollarSign className="h-4 w-4" />{ride.price_per_seat}/seat</div>
+                    <div className="flex items-center gap-1 font-bold text-agro-700"><DollarSign className="h-4 w-4" />{formatCurrency(r.price_per_seat)}/seat</div>
                   </div>
                   {ride.driver_id !== user?.id && (
                     <button onClick={() => handleBook(ride.id)} className="w-full mt-3 bg-agro-600 text-white py-2 rounded-xl text-sm font-medium hover:bg-agro-700 transition">Book Seat</button>
@@ -150,7 +151,7 @@ export default function Carpool() {
               <div className="space-y-3">
                 {myRides.asDriver.map(r => (
                   <div key={r.id} className="bg-white rounded-2xl shadow-sm border p-5 flex items-center justify-between">
-                    <div><p className="font-bold">{r.origin} → {r.destination}</p><p className="text-sm text-gray-500">{new Date(r.departure_time).toLocaleString()} · {r.available_seats} seats left · ${r.price_per_seat}/seat</p></div>
+                    <div><p className="font-bold">{r.origin} → {r.destination}</p><p className="text-sm text-gray-500">{new Date(r.departure_time).toLocaleString()} · {r.available_seats} seats left · {formatCurrency(r.price_per_seat)}/seat</p></div>
                     <div className="flex gap-2">
                       <span className={`text-xs px-3 py-1 rounded-full ${r.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>{r.status}</span>
                       {r.status === 'active' && <button onClick={() => handleCancel(r.id)} className="text-red-600 text-sm hover:underline">Cancel</button>}

@@ -3,6 +3,7 @@ import { Bell, Plus, X, Trash2, Search, CheckCircle2, BellRing } from 'lucide-re
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import { api } from '../utils/api';
+import { formatCurrency } from '../utils/netReturn';
 
 const cropOptions = ['rice', 'wheat', 'tomato', 'cotton', 'potato', 'onion', 'mango', 'sugarcane'];
 
@@ -132,8 +133,8 @@ export default function PriceAlerts() {
               </div>
               <div className="bg-agro-50 rounded-xl p-4 text-sm text-agro-800">
                 {form.alert_on === 'crop_price'
-                  ? <>We'll notify you when your listed <b>{form.crop_name}</b> price goes {form.condition} <b>${form.threshold_price}</b>.</>
-                  : <>We'll notify you when market price of <b>{form.crop_name}</b> goes {form.condition} <b>${form.threshold_price}</b>.</>}
+                  ? <>We'll notify you when your listed <b>{form.crop_name}</b> price goes {form.condition} <b>{formatCurrency(form.threshold_price)}</b>.</>
+                  : <>We'll notify you when market price of <b>{form.crop_name}</b> goes {form.condition} <b>{formatCurrency(form.threshold_price)}</b>.</>}
               </div>
               <button type="submit" className="w-full bg-agro-600 text-white py-3 rounded-xl font-semibold hover:bg-agro-700 transition">
                 {t('common.save')}
@@ -166,7 +167,7 @@ export default function PriceAlerts() {
                   </span>
                 </div>
                 <p className="text-sm text-gray-500 mt-1">
-                  Price goes <b>{alert.condition}</b> <b className="text-agro-700">${alert.threshold_price}</b> {'->'}
+                  Price goes <b>{alert.condition}</b> <b className="text-agro-700">{formatCurrency(alert.threshold_price)}</b> {'->'}
                   <span className={`ml-2 text-xs px-2 py-0.5 rounded-full ${alert.active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
                     {alert.active ? t('priceAlerts.active') : t('priceAlerts.inactive')}
                   </span>

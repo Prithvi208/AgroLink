@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, MapPin, Wheat, Carrot, Apple, Flame, Milk, Bean, Sprout, TreePine, Package } from 'lucide-react';
 import { api } from '../utils/api';
+import { formatCurrency, formatPerUnit } from '../utils/netReturn';
 
 const categories = ['all', 'grains', 'vegetables', 'fruits', 'spices', 'dairy', 'pulses', 'cotton', 'sugarcane'];
 const categoryIcons = {
@@ -99,8 +100,7 @@ export default function Marketplace() {
                 </div>
                 <div className="flex items-center justify-between pt-3 border-t">
                   <div>
-                    <p className="text-2xl font-bold text-agro-700">${crop.price_per_unit}</p>
-                    <p className="text-xs text-gray-500">per {crop.unit}</p>
+                    <p className="text-2xl font-bold text-agro-700">{formatPerUnit(crop.price_per_unit, crop.unit)}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-medium text-gray-900">{crop.quantity} {crop.unit}</p>

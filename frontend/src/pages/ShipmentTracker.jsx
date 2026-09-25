@@ -4,6 +4,7 @@ import { Search, MapPin, Truck, Package, Clock, CheckCircle, Navigation } from '
 import { useAuth } from '../context/AuthContext';
 import { api } from '../utils/api';
 import TrackMap from '../components/TrackMap';
+import { formatCurrency } from '../utils/netReturn';
 
 const CITY_COORDS = {
   'delhi': [28.6139, 77.2090],
@@ -160,8 +161,8 @@ export default function ShipmentTracker() {
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-agro-600" /><span className="text-gray-600">From:</span> {data.booking?.pickup_location}</div>
               <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-red-600" /><span className="text-gray-600">To:</span> {data.booking?.dropoff_location}</div>
-              <div className="flex items-center gap-2"><Truck className="h-4 w-4 text-blue-600" /><span className="text-gray-600">Fare:</span> ${data.booking?.fare}</div>
-              <div className="flex items-center gap-2"><Package className="h-4 w-4 text-earth-600" /><span className="text-gray-600">Value:</span> ${data.booking?.total_price}</div>
+              <div className="flex items-center gap-2"><Truck className="h-4 w-4 text-blue-600" /><span className="text-gray-600">Fare:</span> {formatCurrency(data.booking?.fare)}</div>
+              <div className="flex items-center gap-2"><Package className="h-4 w-4 text-earth-600" /><span className="text-gray-600">Value:</span> {formatCurrency(data.booking?.total_price)}</div>
             </div>
           </div>
 
